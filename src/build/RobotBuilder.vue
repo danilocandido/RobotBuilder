@@ -2,10 +2,10 @@
   <div class="content">
     <button class="add-to-cart" @click="addToCard()">Add to Card</button>
     <div class="top-row" >
-      <div class="top part">
+      <div class="top part" :style="headBorderStyle">
         <div class="robot-name">
           {{ selectedRobot.head.title }}
-          <span :v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
+          <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
         </div>
         <img :src="selectedRobot.head.src" title="head"/>
         <button @click="selectPreviousHead()" class="prev-selector">&#9668;</button>
@@ -92,6 +92,11 @@ export default {
         base: availableParts.bases[this.selectBaseIndex],
       };
     },
+    headBorderStyle() {
+      return {
+        border: this.selectedRobot.head.onSale ? '3px solid red' : '3px solid #aaa',
+      };
+    },
   },
   methods: {
     addToCard() {
@@ -148,7 +153,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .part {
   position: relative;
   width:165px;
