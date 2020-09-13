@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div v-if="availableParts" class="content">
     <div class="preview">
       <CollapsibleSection>
         <div class="preview-content">
@@ -54,8 +54,8 @@
 </template>
 
 <script>
-import availableParts from '../data/parts';
 import createdHookMixin from './created-hook-mixin';
+import getPartsMixin from '../parts/get-parts-mixin';
 import PartSelector from './PartSelector.vue';
 import CollapsibleSection from '../shared/CollapsibleSection.vue';
 
@@ -74,7 +74,6 @@ export default {
   components: { PartSelector, CollapsibleSection },
   data() {
     return {
-      availableParts,
       addedToCard: false,
       cart: [],
       selectedRobot: {
@@ -86,8 +85,11 @@ export default {
       },
     };
   },
-  mixins: [createdHookMixin],
+  mixins: [createdHookMixin, getPartsMixin],
   computed: {
+    availableParts() {
+      return this.$store.state.parts;
+    },
     headBorderStyle() {
       return {
         border: this.selectedRobot.head.onSale ? '3px solid red' : '3px solid #aaa',
