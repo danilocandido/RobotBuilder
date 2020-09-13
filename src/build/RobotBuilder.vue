@@ -78,7 +78,7 @@ import CollapsibleSection from '../shared/CollapsibleSection.vue';
 
 export default {
   name: 'RobotBuilder',
-  beforeRouteEnter(ro, from, next) {
+  beforeRouteLeave(to, from, next) {
     if (this.addedToCard) {
       next(true);
     } else {
@@ -120,7 +120,8 @@ export default {
         + robot.torso.cost
         + robot.base.cost;
 
-      this.cart.push({ ...robot, cost });
+      this.$store.commit('addRobotToCart', { ...robot, cost });
+      this.addedToCard = true;
     },
   },
 };
