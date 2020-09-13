@@ -57,7 +57,8 @@ export default {
       return this.$store.state.robots.cart;
     },
     cartSaleItems() {
-      return this.$store.getters.cartSaleItems;
+      // this is the syntax to acces getters - getters['robots/cartSaleItems']
+      return this.$store.getters['robots/cartSaleItems'];
     },
   },
 };

@@ -1,6 +1,6 @@
 export default {
   created() {
-    this.$store.dispatch('getParts'); // this dispatch do store action called getParts
+    this.$store.dispatch('robots/getParts'); // this dispatch do store action called getParts
   },
   computed: {
     parts() {
